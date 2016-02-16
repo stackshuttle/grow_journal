@@ -1,0 +1,13 @@
+<h2>Show plant</h2>
+
+<ul>
+
+  <li>
+    <strong>Name:</strong>
+    <%= @plant.name %>
+  </li>
+
+</ul>
+
+<%= link "Edit", to: plant_path(@conn, :edit, @plant) %>
+<%= link "Back", to: plant_path(@conn, :index) %>

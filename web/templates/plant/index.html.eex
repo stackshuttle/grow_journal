@@ -1,0 +1,26 @@
+<h2>Listing plants</h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Name</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for plant <- @plants do %>
+    <tr>
+      <td><%= plant.name %></td>
+
+      <td class="text-right">
+        <%= link "Show", to: plant_path(@conn, :show, plant), class: "btn btn-default btn-xs" %>
+        <%= link "Edit", to: plant_path(@conn, :edit, plant), class: "btn btn-default btn-xs" %>
+        <%= link "Delete", to: plant_path(@conn, :delete, plant), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<%= link "New plant", to: plant_path(@conn, :new) %>
