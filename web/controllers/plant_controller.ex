@@ -2,6 +2,7 @@ defmodule GrowJournal.PlantController do
   use GrowJournal.Web, :controller
 
   alias GrowJournal.Plant
+  alias GrowJournal.Event
 
   plug :scrub_params, "plant" when action in [:create, :update]
 
@@ -30,7 +31,10 @@ defmodule GrowJournal.PlantController do
 
   def show(conn, %{"id" => id}) do
     plant = Repo.get!(Plant, id)
-    render(conn, "show.html", plant: plant)
+    query = from e in Event,
+              where: e.plant_id == ^id
+    events = Repo.all(query)
+    render(conn, "show.html", plant: plant, events: events)
   end
 
   def edit(conn, %{"id" => id}) do

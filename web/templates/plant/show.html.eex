@@ -1,13 +1,19 @@
 <h2>Show plant</h2>
 
+<strong>Name:</strong>
+<%= @plant.name %>
+<br />
+<strong>Events:</strong>
+<%= for event <- @events do %>
 <ul>
-
-  <li>
-    <strong>Name:</strong>
-    <%= @plant.name %>
-  </li>
-
+  <li>Name: <%= event.name %></li>
+  <li>When: <%= event.when %></li>
+  <li>Description: <%= event.description %></li>
 </ul>
+<% end %>
+<%= link "New Event", to: plant_event_path(@conn, :new, @plant) %>
+<br />
+
 
 <%= link "Edit", to: plant_path(@conn, :edit, @plant) %>
 <%= link "Back", to: plant_path(@conn, :index) %>
