@@ -29,7 +29,7 @@ defmodule GrowJournal.EventController do
       {:ok, event} ->
         conn
         |> put_flash(:info, "Event created successfully.")
-        |> redirect(to: plant_event_path(conn, :index, plant_id))
+        |> redirect(to: plant_path(conn, :show, plant_id))
       {:error, changeset} ->
         render(conn, "new.html", changeset: changeset, plant_id: plant_id)
     end
