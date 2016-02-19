@@ -17,7 +17,9 @@ defmodule GrowJournal.Router do
     pipe_through :browser # Use the default browser stack
 
     get "/", PageController, :index
-    resources "/plants", PlantController
+    resources "/plants", PlantController do
+      resources "/events", EventController
+    end
   end
 
   # Other scopes may use custom stacks.

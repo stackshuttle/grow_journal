@@ -1,0 +1,6 @@
+<h2>New event</h2>
+
+<%= render "form.html", changeset: @changeset,
+                        action: plant_event_path(@conn, :create, @plant_id) %>
+
+<%= link "Back", to: plant_event_path(@conn, :index, @plant_id) %>

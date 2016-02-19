@@ -1,14 +1,16 @@
-defmodule GrowJournal.Plant do
+defmodule GrowJournal.Event do
   use GrowJournal.Web, :model
 
-  schema "plants" do
+  schema "events" do
     field :name, :string
-    has_many :events, GrowJournal.Event
+    field :when, Ecto.DateTime
+    field :description, :string
+    belongs_to :plant, GrowJournal.Plant
 
     timestamps
   end
 
-  @required_fields ~w(name)
+  @required_fields ~w(name when description)
   @optional_fields ~w()
 
   @doc """
