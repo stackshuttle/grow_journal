@@ -3,7 +3,15 @@
 <strong>Name:</strong>
 <%= @plant.name %>
 <br />
-<strong>Events:</strong>
+
+<strong>Picture:</strong>
+<img src="<%= @plant.picture %>" />
+<br />
+
+<strong>Description:</strong>
+<%= @plant.description %>
+<br/>
+
 <%= for event <- @events do %>
 <ul>
   <li>Name: <%= event.name %></li>

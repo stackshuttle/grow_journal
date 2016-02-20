@@ -10,8 +10,8 @@ defmodule GrowJournal.Event do
     timestamps
   end
 
-  @required_fields ~w(name when description)
-  @optional_fields ~w()
+  @required_fields ~w(name when plant_id)
+  @optional_fields ~w(description)
 
   @doc """
   Creates a changeset based on the `model` and `params`.
