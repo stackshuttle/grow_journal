@@ -40,21 +40,23 @@ defmodule GrowJournal.EventController do
     render(conn, "show.html", event: event)
   end
 
-  def edit(conn, %{"id" => id}) do
+  def edit(conn, %{"id" => id, "plant_id" => plant_id}) do
     event = Repo.get!(Event, id)
+    plant = Repo.get!(Plant, plant_id)
     changeset = Event.changeset(event)
-    render(conn, "edit.html", event: event, changeset: changeset)
+    render(conn, "edit.html", event: event, changeset: changeset, plant: plant)
   end
 
-  def update(conn, %{"id" => id, "event" => event_params}) do
+  def update(conn, %{"id" => id, "event" => event_params, "plant_id" => plant_id}) do
     event = Repo.get!(Event, id)
     changeset = Event.changeset(event, event_params)
+    plant = Repo.get!(Plant, plant_id)
 
     case Repo.update(changeset) do
       {:ok, event} ->
         conn
         |> put_flash(:info, "Event updated successfully.")
-        |> redirect(to: plant_path(conn, :show, event))
+        |> redirect(to: plant_path(conn, :show, plant))
       {:error, changeset} ->
         render(conn, "edit.html", event: event, changeset: changeset)
     end
