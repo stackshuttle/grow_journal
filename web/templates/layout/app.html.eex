@@ -12,7 +12,7 @@
   </head>
 
   <body>
-    <div class="container">
+    <div class="container-fluid">
       <header class="header">
         <nav role="navigation">
           <ul class="nav nav-pills pull-right">
@@ -25,7 +25,20 @@
       <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
 
       <main role="main">
-        <%= render @view_module, @view_template, assigns %>
+
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-md-2">
+              <h2>Plants</h2>
+              <div class="list-group">
+                <%= link "Add new plant", to: plant_path(@conn, :new), class: "list-group-item" %>
+              </div>
+            </div>
+            <div class="col-md-10">
+              <%= render @view_module, @view_template, assigns %>
+            </div>
+          </div>
+        </div>
       </main>
 
     </div> <!-- /container -->

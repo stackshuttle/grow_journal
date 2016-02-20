@@ -8,9 +8,15 @@
   <div class="form-group">
     <%= label f, :name, class: "control-label" %>
     <%= text_input f, :name, class: "form-control" %>
-    <%= text_input f, :description, class: "form-control" %>
-    <%= file_input f, :picture, class: "form-control" %>
     <%= error_tag f, :name %>
+
+    <%= label f, :description, class: "control-label" %>
+    <%= text_input f, :description, class: "form-control" %>
+    <%= error_tag f, :description %>
+
+    <%= label f, :picture, class: "control-label" %>
+    <%= file_input f, :picture %>
+    <%= error_tag f, :picture %>
   </div>
 
   <div class="form-group">

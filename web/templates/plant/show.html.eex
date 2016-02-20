@@ -1,4 +1,9 @@
-<h2>Show plant</h2>
+<h2>
+  Plant details
+  <small>
+    <%= link "Edit", to: plant_path(@conn, :edit, @plant.id) %>
+  </small>
+</h2>
 
 <strong>Name:</strong>
 <%= @plant.name %>
@@ -12,16 +17,30 @@
 <%= @plant.description %>
 <br/>
 
+<h3>
+  Events
+  <small>
+    <%= link "Add event", to: plant_event_path(@conn, :new, @plant) %>
+  </small>
+</h3>
+<table class="table table-hover">
+  <thead>
+    <th>Name</th>
+    <th>When</th>
+    <th>Description</th>
+    <th></th>
+  </thead>
+  <tbody>
 <%= for event <- @events do %>
-<ul>
-  <li>Name: <%= event.name %></li>
-  <li>When: <%= event.when %></li>
-  <li>Description: <%= event.description %></li>
-</ul>
+  <tr>
+    <td><%= event.name %></td>
+    <td><%= event.when %></td>
+    <td><%= event.description %></td>
+
+    <td class="text-right">
+      <%= link "Edit", to: plant_event_path(@conn, :edit, @plant, event), class: "btn btn-default btn-xs" %>
+      <%= link "Delete", to: plant_event_path(@conn, :delete, @plant, event), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
+    </td>
+  </tr>
 <% end %>
-<%= link "New Event", to: plant_event_path(@conn, :new, @plant) %>
-<br />
-
-
-<%= link "Edit", to: plant_path(@conn, :edit, @plant) %>
-<%= link "Back", to: plant_path(@conn, :index) %>
+</table>

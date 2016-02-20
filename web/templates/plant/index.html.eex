@@ -1,9 +1,9 @@
-<h2>Listing plants</h2>
-
-<table class="table">
+<h1>List of plants</h1>
+<table class="table table-hover">
   <thead>
     <tr>
       <th>Name</th>
+      <th>Last updated</th>
 
       <th></th>
     </tr>
@@ -12,6 +12,7 @@
 <%= for plant <- @plants do %>
     <tr>
       <td><%= plant.name %></td>
+      <td><%= plant.updated_at %></td>
 
       <td class="text-right">
         <%= link "Show", to: plant_path(@conn, :show, plant), class: "btn btn-default btn-xs" %>
@@ -22,5 +23,3 @@
 <% end %>
   </tbody>
 </table>
-
-<%= link "New plant", to: plant_path(@conn, :new) %>
