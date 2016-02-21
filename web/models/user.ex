@@ -8,8 +8,8 @@ defmodule GrowJournal.User do
     timestamps
   end
 
-  @required_fields ~w(username email)
-  @optional_fields ~w()
+  @required_fields ~w(username)
+  @optional_fields ~w(email)
 
   @doc """
   Creates a changeset based on the `model` and `params`.
