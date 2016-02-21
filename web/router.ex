@@ -13,10 +13,21 @@ defmodule GrowJournal.Router do
     plug :accepts, ["json"]
   end
 
+  pipeline :admin do
+    plug :accepts, ["html"]
+    plug :fetch_session
+    plug :fetch_flash
+    plug :protect_from_forgery
+    plug :put_secure_browser_headers
+    plug GrowJournal.Auth, repo: GrowJournal.Repo
+  end
+
   scope "/", GrowJournal do
     pipe_through :browser # Use the default browser stack
 
     get "/", PageController, :index
+    get "/login", UserController, :login
+    post "/login", UserController, :handle_login
     resources "/plants", PlantController do
       resources "/events", EventController
     end
@@ -24,7 +35,7 @@ defmodule GrowJournal.Router do
   end
 
   scope "/admin", GrowJournal.Admin, as: :admin do
-    pipe_through :browser
+    pipe_through :admin
 
     resources "/users", UserController
   end

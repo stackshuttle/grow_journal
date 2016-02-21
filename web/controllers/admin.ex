@@ -5,6 +5,19 @@ defmodule GrowJournal.Admin do
     alias GrowJournal.User
 
     plug :scrub_params, "user" when action in [:create, :update]
+    plug :authenticate, "user" when action in [:index, :create, :update,
+                                               :edit, :delete, :show, :new]
+
+    defp authenticate(conn, _opts) do
+      if conn.assigns.current_user do
+        conn
+      else
+        conn
+        |> put_flash(:error, "You must be logged in to access that page")
+        |> redirect(to: page_path(conn, :index))
+        |> halt()
+      end
+    end
 
     def index(conn, _params) do
       users = Repo.all(User)
