@@ -20,6 +20,7 @@ defmodule GrowJournal.Router do
     resources "/plants", PlantController do
       resources "/events", EventController
     end
+    resources "/users", UserController
   end
 
   # Other scopes may use custom stacks.
