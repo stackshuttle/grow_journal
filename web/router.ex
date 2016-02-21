@@ -20,6 +20,12 @@ defmodule GrowJournal.Router do
     resources "/plants", PlantController do
       resources "/events", EventController
     end
+    resources "/users", UserController, except: [:delete, :edit, :update]
+  end
+
+  scope "/admin", GrowJournal.Admin, as: :admin do
+    pipe_through :browser
+
     resources "/users", UserController
   end
 
