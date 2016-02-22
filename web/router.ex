@@ -26,8 +26,11 @@ defmodule GrowJournal.Router do
     pipe_through :browser # Use the default browser stack
 
     get "/", PageController, :index
-    get "/login", UserController, :login
-    post "/login", UserController, :handle_login
+
+    get "/login", SessionController, :new
+    post "/login", SessionController, :create
+    get "/logout", SessionController, :delete
+
     resources "/plants", PlantController do
       resources "/events", EventController
     end

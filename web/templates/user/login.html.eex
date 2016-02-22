@@ -1,6 +1,0 @@
-<h2>Login</h2>
-
-<%= render "login_form.html", changeset: @changeset,
-                        action: user_path(@conn, :handle_login) %>
-
-<%= link "Back", to: page_path(@conn, :index) %>
