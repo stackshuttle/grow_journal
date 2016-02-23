@@ -1,5 +1,6 @@
 defmodule GrowJournal.Auth do
   import Plug.Conn
+  import Comeonin.Bcrypt, only: [checkpw: 2]
 
   def init(opts) do
     Keyword.fetch!(opts, :repo)
@@ -22,13 +23,15 @@ defmodule GrowJournal.Auth do
     configure_session(conn, drop: true)
   end
 
-  def login_by_username_and_pass(conn, username, opts) do
+  def login_by_username_and_pass(conn, username, given_pass, opts) do
     repo = Keyword.fetch!(opts, :repo)
     user = repo.get_by(GrowJournal.User, username: username)
 
     cond do
-      user ->
+      user && checkpw(given_pass, user.password_hash) ->
         {:ok, login(conn, user)}
+      user ->
+        {:error, :unauthorized, conn}
       true ->
         {:error, :not_found, conn}
     end

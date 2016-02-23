@@ -5,9 +5,10 @@ defmodule GrowJournal.SessionController do
     render conn, "new.html"
   end
 
-  def create(conn, %{"session" => %{"username" => user}}) do
+  def create(conn, %{"session" => %{"username" => user,
+                                    "password" => password}}) do
     case GrowJournal.Auth.login_by_username_and_pass(
-      conn, user, repo: Repo
+      conn, user, password, repo: Repo
     ) do
       {:ok, conn} ->
         conn
