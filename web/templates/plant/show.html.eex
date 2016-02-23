@@ -10,7 +10,7 @@
 <br />
 
 <strong>Picture:</strong>
-<img src="<%= @plant.picture %>" />
+<img src="/media<%= @plant.picture %>" />
 <br />
 
 <strong>Description:</strong>

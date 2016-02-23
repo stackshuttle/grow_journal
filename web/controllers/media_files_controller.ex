@@ -5,7 +5,8 @@ defmodule GrowJournal.MediaFilesController do
   @media_folder "/uploads"
 
   def download(conn, %{"filepath" => filepath}) do
-    path = "#{System.cwd}/#{@media_folder}/#{filepath}"
+    filepath = Enum.join(filepath, "/")
+    path = "#{System.cwd}#{@media_folder}/#{filepath}"
     conn
     |> put_resp_content_type("image/png")
     |> send_file(200, path)

@@ -18,8 +18,8 @@ defmodule GrowJournal.PlantController do
 
   def create(conn, %{"plant" => plant_params}) do
     picture = plant_params["picture"]
-    short_path = "/priv/static/uploads/plants/" <> picture.filename
-    full_path = System.cwd() <> short_path
+    short_path = "/plants/" <> picture.filename
+    full_path = System.cwd() <> "/uploads" <> short_path
     plant_params = %{plant_params| "picture" => short_path}
     changeset = Plant.changeset(%Plant{}, plant_params)
 
@@ -28,8 +28,6 @@ defmodule GrowJournal.PlantController do
 
     case Repo.insert(changeset) do
       {:ok, _plant} ->
-        require IEx
-        IEx.pry
         conn
         |> put_flash(:info, "Plant created successfully.")
         |> redirect(to: plant_path(conn, :index))
