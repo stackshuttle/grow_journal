@@ -26,6 +26,7 @@ defmodule GrowJournal.Router do
     pipe_through :browser # Use the default browser stack
 
     get "/", PageController, :index
+    get "/media/:filepath", MediaFilesController, :download
 
     get "/login", SessionController, :new
     post "/login", SessionController, :create
