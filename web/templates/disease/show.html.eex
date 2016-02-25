@@ -1,0 +1,18 @@
+<h2>Show disease</h2>
+
+<ul>
+
+  <li>
+    <strong>Plant:</strong>
+    <%= @disease.plant_id %>
+  </li>
+
+  <li>
+    <strong>Name:</strong>
+    <%= @disease.name %>
+  </li>
+
+</ul>
+
+<%= link "Edit", to: disease_path(@conn, :edit, @disease) %>
+<%= link "Back", to: disease_path(@conn, :index) %>

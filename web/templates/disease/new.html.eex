@@ -1,0 +1,6 @@
+<h2>New disease</h2>
+
+<%= render "form.html", changeset: @changeset,
+                        action: disease_path(@conn, :create) %>
+
+<%= link "Back", to: disease_path(@conn, :index) %>

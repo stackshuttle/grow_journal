@@ -33,6 +33,7 @@ defmodule GrowJournal.Router do
     get "/logout", SessionController, :delete
 
     resources "/varieties", VarietyController
+    resources "/diseases", DiseaseController
     resources "/plants", PlantController
     resources "/events", EventController
     resources "/users", UserController, except: [:delete, :edit, :update]
