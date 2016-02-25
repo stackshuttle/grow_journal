@@ -6,8 +6,6 @@
       <th>Name</th>
       <th>When</th>
       <th>Description</th>
-      <th>Plant</th>
-
       <th></th>
     </tr>
   </thead>
@@ -17,16 +15,15 @@
       <td><%= event.name %></td>
       <td><%= event.when %></td>
       <td><%= event.description %></td>
-      <td><%= event.plant_id %></td>
 
       <td class="text-right">
-        <%= link "Show", to: plant_path(@conn, :show, event), class: "btn btn-default btn-xs" %>
-        <%= link "Edit", to: plant_path(@conn, :edit, event), class: "btn btn-default btn-xs" %>
-        <%= link "Delete", to: plant_path(@conn, :delete, event), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
+        <%= link "Show", to: event_path(@conn, :show, event), class: "btn btn-default btn-xs" %>
+        <%= link "Edit", to: event_path(@conn, :edit, event), class: "btn btn-default btn-xs" %>
+        <%= link "Delete", to: event_path(@conn, :delete, event), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
       </td>
     </tr>
 <% end %>
   </tbody>
 </table>
 
-<%= link "New event", to: plant_event_path(@conn, :new, @plant_id) %>
+<%= link "New event", to: event_path(@conn, :new) %>

@@ -5,12 +5,12 @@ defmodule GrowJournal.Event do
     field :name, :string
     field :when, Ecto.DateTime
     field :description, :string
-    belongs_to :plant, GrowJournal.Plant
+    belongs_to :user_plant, GrowJournal.Plant
 
     timestamps
   end
 
-  @required_fields ~w(name when plant_id)
+  @required_fields ~w(name when user_plant_id)
   @optional_fields ~w(description)
 
   @doc """

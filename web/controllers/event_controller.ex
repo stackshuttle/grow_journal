@@ -8,30 +8,24 @@ defmodule GrowJournal.EventController do
   plug :scrub_params, "event" when action in [:create, :update]
 
   def index(conn, params) do
-    query = from e in Event,
-              where: e.plant_id == ^params["plant_id"]
-    events = Repo.all(query)
-    render(conn, "index.html", events: events, plant_id: params["plant_id"])
+    events = Repo.all(Event)
+    render(conn, "index.html", events: events)
   end
 
   def new(conn, params) do
     changeset = Event.changeset(%Event{})
-    render(conn, "new.html", changeset: changeset, plant_id: params["plant_id"])
+    render(conn, "new.html", changeset: changeset)
   end
 
-  def create(conn, %{"event" => event_params, "plant_id" => plant_id}) do
-    {plant_id_integer, _} = to_char_list(plant_id) |> :string.to_integer
-    plant = Repo.get!(Plant, plant_id)
-    changeset = build(plant, :events)
-      |> Event.changeset(event_params)
-
+  def create(conn, %{"event" => event_params}) do
+    changeset = Event.changeset(event_params)
     case Repo.insert(changeset) do
       {:ok, event} ->
         conn
         |> put_flash(:info, "Event created successfully.")
-        |> redirect(to: plant_path(conn, :show, plant_id))
+        |> redirect(to: event_path(conn, :show, event))
       {:error, changeset} ->
-        render(conn, "new.html", changeset: changeset, plant_id: plant_id)
+        render(conn, "new.html", changeset: changeset)
     end
   end
 

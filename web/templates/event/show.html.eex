@@ -1,7 +1,6 @@
 <h2>Show event</h2>
 
 <ul>
-
   <li>
     <strong>Name:</strong>
     <%= @event.name %>
@@ -16,12 +15,6 @@
     <strong>Description:</strong>
     <%= @event.description %>
   </li>
-
-  <li>
-    <strong>Plant:</strong>
-    <%= @event.plant_id %>
-  </li>
-
 </ul>
 
 <= link "Edit", to: event_path(@conn, :edit, @event) %>

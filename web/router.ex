@@ -32,9 +32,8 @@ defmodule GrowJournal.Router do
     post "/login", SessionController, :create
     get "/logout", SessionController, :delete
 
-    resources "/plants", PlantController do
-      resources "/events", EventController
-    end
+    resources "/plants", PlantController
+    resources "/events", EventController
     resources "/users", UserController, except: [:delete, :edit, :update]
   end
 
