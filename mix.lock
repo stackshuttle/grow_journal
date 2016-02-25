@@ -15,4 +15,5 @@
   "poison": {:hex, :poison, "1.5.2"},
   "poolboy": {:hex, :poolboy, "1.5.1"},
   "postgrex": {:hex, :postgrex, "0.11.1"},
+  "qrcode": {:git, "git@gitlab.com:Pacodastre/qrcode.git", "87d47b9ce5f002a8fde4e2e14e00490f703c1be7", []},
   "ranch": {:hex, :ranch, "1.2.1"}}
