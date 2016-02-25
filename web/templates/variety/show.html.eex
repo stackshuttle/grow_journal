@@ -1,0 +1,18 @@
+<h2>Show variety</h2>
+
+<ul>
+
+  <li>
+    <strong>Plant:</strong>
+    <%= @variety.plant_id %>
+  </li>
+
+  <li>
+    <strong>Name:</strong>
+    <%= @variety.name %>
+  </li>
+
+</ul>
+
+<%= link "Edit", to: variety_path(@conn, :edit, @variety) %>
+<%= link "Back", to: variety_path(@conn, :index) %>

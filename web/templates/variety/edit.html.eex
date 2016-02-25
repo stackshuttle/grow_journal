@@ -1,0 +1,6 @@
+<h2>Edit variety</h2>
+
+<%= render "form.html", changeset: @changeset,
+                        action: variety_path(@conn, :update, @variety) %>
+
+<%= link "Back", to: variety_path(@conn, :index) %>
