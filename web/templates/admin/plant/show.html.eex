@@ -1,0 +1,21 @@
+<h2>
+  Plant details
+  <small>
+    <%= link "Edit", to: admin_plant_path(@conn, :edit, @plant.id) %>
+  </small>
+</h2>
+
+<strong>Name:</strong>
+<%= @plant.name %>
+<br />
+
+<strong>QR Code:</strong>
+<img src="/media<%= @plant.qrcode_path %>" />
+
+<strong>Picture:</strong>
+<img src="/media<%= @plant.picture %>" />
+<br />
+
+<strong>Description:</strong>
+<%= @plant.description %>
+<br/>
