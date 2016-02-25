@@ -3,7 +3,6 @@ defmodule GrowJournal.Plant do
 
   schema "plants" do
     field :name, :string
-    has_many :events, GrowJournal.Event
     field :picture, :string
     field :description, :string
     field :qrcode_path, :string
@@ -12,7 +11,7 @@ defmodule GrowJournal.Plant do
   end
 
   @required_fields ~w(name)
-  @optional_fields ~w(picture description events qrcode_path)
+  @optional_fields ~w(picture description qrcode_path)
 
   @doc """
   Creates a changeset based on the `model` and `params`.
