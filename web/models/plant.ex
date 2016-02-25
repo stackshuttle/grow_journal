@@ -6,12 +6,13 @@ defmodule GrowJournal.Plant do
     has_many :events, GrowJournal.Event
     field :picture, :string
     field :description, :string
+    field :qrcode_path, :string
 
     timestamps
   end
 
   @required_fields ~w(name)
-  @optional_fields ~w(picture description events)
+  @optional_fields ~w(picture description events qrcode_path)
 
   @doc """
   Creates a changeset based on the `model` and `params`.
