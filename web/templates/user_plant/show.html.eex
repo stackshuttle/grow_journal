@@ -1,0 +1,18 @@
+<h2>Show user plant</h2>
+
+<ul>
+
+  <li>
+    <strong>User:</strong>
+    <%= @user_plant.user_id %>
+  </li>
+
+  <li>
+    <strong>Plant:</strong>
+    <%= @user_plant.plant_id %>
+  </li>
+
+</ul>
+
+<%= link "Edit", to: user_plant_path(@conn, :edit, @user_plant) %>
+<%= link "Back", to: user_plant_path(@conn, :index) %>
