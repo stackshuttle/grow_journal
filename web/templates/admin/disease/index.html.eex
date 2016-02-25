@@ -1,0 +1,28 @@
+<h2>Listing diseases</h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Plant</th>
+      <th>Name</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for disease <- @diseases do %>
+    <tr>
+      <td><%= disease.plant_id %></td>
+      <td><%= disease.name %></td>
+
+      <td class="text-right">
+        <%= link "Show", to: admin_disease_path(@conn, :show, disease), class: "btn btn-default btn-xs" %>
+        <%= link "Edit", to: admin_disease_path(@conn, :edit, disease), class: "btn btn-default btn-xs" %>
+        <%= link "Delete", to: admin_disease_path(@conn, :delete, disease), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<%= link "New disease", to: admin_disease_path(@conn, :new) %>

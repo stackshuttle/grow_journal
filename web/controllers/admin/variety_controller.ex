@@ -1,4 +1,4 @@
-defmodule GrowJournal.VarietyController do
+defmodule GrowJournal.Admin.VarietyController do
   use GrowJournal.Web, :controller
 
   alias GrowJournal.Variety

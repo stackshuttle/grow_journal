@@ -1,4 +1,4 @@
-defmodule GrowJournal.PestController do
+defmodule GrowJournal.Admin.PestController do
   use GrowJournal.Web, :controller
 
   alias GrowJournal.Pest
