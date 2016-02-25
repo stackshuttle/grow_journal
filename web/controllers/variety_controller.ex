@@ -22,7 +22,7 @@ defmodule GrowJournal.VarietyController do
       {:ok, _variety} ->
         conn
         |> put_flash(:info, "Variety created successfully.")
-        |> redirect(to: variety_path(conn, :index))
+        |> redirect(to: admin_variety_path(conn, :index))
       {:error, changeset} ->
         render(conn, "new.html", changeset: changeset)
     end
@@ -47,7 +47,7 @@ defmodule GrowJournal.VarietyController do
       {:ok, variety} ->
         conn
         |> put_flash(:info, "Variety updated successfully.")
-        |> redirect(to: variety_path(conn, :show, variety))
+        |> redirect(to: admin_variety_path(conn, :show, variety))
       {:error, changeset} ->
         render(conn, "edit.html", variety: variety, changeset: changeset)
     end
@@ -62,6 +62,6 @@ defmodule GrowJournal.VarietyController do
 
     conn
     |> put_flash(:info, "Variety deleted successfully.")
-    |> redirect(to: variety_path(conn, :index))
+    |> redirect(to: admin_variety_path(conn, :index))
   end
 end

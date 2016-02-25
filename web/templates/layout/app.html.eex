@@ -15,11 +15,11 @@
   <nav class="navbar navbar-default">
     <div class="container-fluid">
       <div class="navbar-header">
-        <a class="navbar-brand" href="<%= plant_path(@conn, :index) %>">
+        <a class="navbar-brand" href="">
           <img with="30" height="30" alt="GrowJournal Logo" src="<%= static_path(@conn, "/images/logo.svg") %>"/>
         </a>
         <ul class="nav navbar-nav">
-          <li><%= link "Grow Journal", to: plant_path(@conn, :index) %></li>
+          <li><%= link "Grow Journal", to: "" %></li>
         </ul>
       </div>
 
@@ -51,7 +51,7 @@
           <div class="col-md-2">
             <h2>Plants</h2>
             <div class="list-group">
-              <%= link "Add new plant", to: plant_path(@conn, :new), class: "list-group-item" %>
+              <%= link "Add new plant", to: admin_plant_path(@conn, :new), class: "list-group-item" %>
             </div>
           </div>
           <div class="col-md-10">

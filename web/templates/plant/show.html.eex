@@ -1,7 +1,7 @@
 <h2>
   Plant details
   <small>
-    <%= link "Edit", to: plant_path(@conn, :edit, @plant.id) %>
+    <%= link "Edit", to: admin_plant_path(@conn, :edit, @plant.id) %>
   </small>
 </h2>
 

@@ -26,7 +26,7 @@ defmodule GrowJournal.PlantController do
       http = "https://"
     end
 
-    "#{http}#{conn.host}#{port}#{plant_path(conn, :show, plant_id)}"
+    "#{http}#{conn.host}#{port}#{admin_plant_path(conn, :show, plant_id)}"
   end
 
 
@@ -57,7 +57,7 @@ defmodule GrowJournal.PlantController do
         Repo.update(plant)
         conn
         |> put_flash(:info, "Plant created successfully.")
-        |> redirect(to: plant_path(conn, :index))
+        |> redirect(to: admin_plant_path(conn, :index))
       {:error, changeset} ->
         render(conn, "new.html", changeset: changeset)
     end
@@ -82,7 +82,7 @@ defmodule GrowJournal.PlantController do
       {:ok, plant} ->
         conn
         |> put_flash(:info, "Plant updated successfully.")
-        |> redirect(to: plant_path(conn, :show, plant))
+        |> redirect(to: admin_plant_path(conn, :show, plant))
       {:error, changeset} ->
         render(conn, "edit.html", plant: plant, changeset: changeset)
     end
@@ -97,6 +97,6 @@ defmodule GrowJournal.PlantController do
 
     conn
     |> put_flash(:info, "Plant deleted successfully.")
-    |> redirect(to: plant_path(conn, :index))
+    |> redirect(to: admin_plant_path(conn, :index))
   end
 end

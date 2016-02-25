@@ -14,5 +14,5 @@
 
 </ul>
 
-<%= link "Edit", to: pest_path(@conn, :edit, @pest) %>
-<%= link "Back", to: pest_path(@conn, :index) %>
+<%= link "Edit", to: admin_pest_path(@conn, :edit, @pest) %>
+<%= link "Back", to: admin_pest_path(@conn, :index) %>

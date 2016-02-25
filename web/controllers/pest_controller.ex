@@ -22,7 +22,7 @@ defmodule GrowJournal.PestController do
       {:ok, _pest} ->
         conn
         |> put_flash(:info, "Pest created successfully.")
-        |> redirect(to: pest_path(conn, :index))
+        |> redirect(to: admin_pest_path(conn, :index))
       {:error, changeset} ->
         render(conn, "new.html", changeset: changeset)
     end
@@ -47,7 +47,7 @@ defmodule GrowJournal.PestController do
       {:ok, pest} ->
         conn
         |> put_flash(:info, "Pest updated successfully.")
-        |> redirect(to: pest_path(conn, :show, pest))
+        |> redirect(to: admin_pest_path(conn, :show, pest))
       {:error, changeset} ->
         render(conn, "edit.html", pest: pest, changeset: changeset)
     end
@@ -62,6 +62,6 @@ defmodule GrowJournal.PestController do
 
     conn
     |> put_flash(:info, "Pest deleted successfully.")
-    |> redirect(to: pest_path(conn, :index))
+    |> redirect(to: admin_pest_path(conn, :index))
   end
 end

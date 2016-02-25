@@ -22,7 +22,7 @@ defmodule GrowJournal.DiseaseController do
       {:ok, _disease} ->
         conn
         |> put_flash(:info, "Disease created successfully.")
-        |> redirect(to: disease_path(conn, :index))
+        |> redirect(to: admin_disease_path(conn, :index))
       {:error, changeset} ->
         render(conn, "new.html", changeset: changeset)
     end
@@ -47,7 +47,7 @@ defmodule GrowJournal.DiseaseController do
       {:ok, disease} ->
         conn
         |> put_flash(:info, "Disease updated successfully.")
-        |> redirect(to: disease_path(conn, :show, disease))
+        |> redirect(to: admin_disease_path(conn, :show, disease))
       {:error, changeset} ->
         render(conn, "edit.html", disease: disease, changeset: changeset)
     end
@@ -62,6 +62,6 @@ defmodule GrowJournal.DiseaseController do
 
     conn
     |> put_flash(:info, "Disease deleted successfully.")
-    |> redirect(to: disease_path(conn, :index))
+    |> redirect(to: admin_disease_path(conn, :index))
   end
 end

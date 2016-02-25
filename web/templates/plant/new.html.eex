@@ -1,6 +1,6 @@
 <h2>New plant</h2>
 
 <%= render "form.html", changeset: @changeset,
-                        action: plant_path(@conn, :create) %>
+                        action: admin_plant_path(@conn, :create) %>
 
-<%= link "Back", to: plant_path(@conn, :index) %>
+<%= link "Back", to: admin_plant_path(@conn, :index) %>

@@ -32,10 +32,6 @@ defmodule GrowJournal.Router do
     post "/login", SessionController, :create
     get "/logout", SessionController, :delete
 
-    resources "/varieties", VarietyController
-    resources "/diseases", DiseaseController
-    resources "/plants", PlantController
-    resources "/pests", PestController
     resources "/user_plants", UserPlantController
     resources "/events", EventController
     resources "/users", UserController, except: [:delete, :edit, :update]
@@ -45,6 +41,18 @@ defmodule GrowJournal.Router do
     pipe_through :admin
 
     resources "/users", UserController
+    resources "/plants", PlantController
+    resources "/pests", PestController
+    resources "/diseases", DiseaseController
+    resources "/variety", VarietyController
+  end
+
+  scope "/plants", GrowJournal, as: :plants do
+    pipe_through :browser
+
+    get "/", PlantController, :index
+    get "/:id/", PlantController, :show
+    get "/:id/diseases", DiseaseController, :index
   end
 
   # Other scopes may use custom stacks.

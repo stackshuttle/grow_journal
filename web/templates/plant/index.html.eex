@@ -15,9 +15,9 @@
       <td><%= plant.updated_at %></td>
 
       <td class="text-right">
-        <%= link "Show", to: plant_path(@conn, :show, plant), class: "btn btn-default btn-xs" %>
-        <%= link "Edit", to: plant_path(@conn, :edit, plant), class: "btn btn-default btn-xs" %>
-        <%= link "Delete", to: plant_path(@conn, :delete, plant), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
+        <%= link "Show", to: plants_plant_path(@conn, :show, plant), class: "btn btn-default btn-xs" %>
+        <%= link "Edit", to: admin_plant_path(@conn, :edit, plant), class: "btn btn-default btn-xs" %>
+        <%= link "Delete", to: admin_plant_path(@conn, :delete, plant), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
       </td>
     </tr>
 <% end %>
