@@ -1,0 +1,28 @@
+<h2>Listing pests</h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Plant</th>
+      <th>Name</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for pest <- @pests do %>
+    <tr>
+      <td><%= pest.plant_id %></td>
+      <td><%= pest.name %></td>
+
+      <td class="text-right">
+        <%= link "Show", to: admin_pest_path(@conn, :show, pest), class: "btn btn-default btn-xs" %>
+        <%= link "Edit", to: admin_pest_path(@conn, :edit, pest), class: "btn btn-default btn-xs" %>
+        <%= link "Delete", to: admin_pest_path(@conn, :delete, pest), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<%= link "New pest", to: admin_pest_path(@conn, :new) %>
