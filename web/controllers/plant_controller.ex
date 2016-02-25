@@ -6,6 +6,31 @@ defmodule GrowJournal.PlantController do
 
   plug :scrub_params, "plant" when action in [:create, :update]
 
+  defp create_qrcode_for_plant(conn, plant_id) do
+    url = build_plant_absolute_url(conn, plant_id)
+    qrcode = :qrcode.encode(url)
+    png = :qrcode_demo.simple_png_encode(qrcode)
+    short_path = "/plants/test.png"
+    qrcode_path = "#{System.cwd}/uploads#{short_path}"
+    :ok = :file.write_file(qrcode_path, png)
+    short_path
+  end
+
+  defp build_plant_absolute_url(conn, plant_id) do
+    port = ""
+    if conn.port != 80 do
+      port = ":#{conn.port}"
+    end
+
+    http = "http://"
+    if conn.scheme != :http do
+      http = "https://"
+    end
+
+    "#{http}#{conn.host}#{port}#{plant_path(conn, :show, plant_id)}"
+  end
+
+
   def index(conn, _params) do
     plants = Repo.all(Plant)
     render(conn, "index.html", plants: plants)
@@ -27,7 +52,10 @@ defmodule GrowJournal.PlantController do
     File.cp picture.path, full_path
 
     case Repo.insert(changeset) do
-      {:ok, _plant} ->
+      {:ok, plant} ->
+        qrcode = create_qrcode_for_plant(conn, plant.id)
+        plant = %Plant{plant| :qrcode_path => qrcode}
+        Repo.update(plant)
         conn
         |> put_flash(:info, "Plant created successfully.")
         |> redirect(to: plant_path(conn, :index))
