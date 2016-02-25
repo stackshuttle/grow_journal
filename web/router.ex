@@ -35,6 +35,7 @@ defmodule GrowJournal.Router do
     resources "/varieties", VarietyController
     resources "/diseases", DiseaseController
     resources "/plants", PlantController
+    resources "/pests", PestController
     resources "/events", EventController
     resources "/users", UserController, except: [:delete, :edit, :update]
   end
