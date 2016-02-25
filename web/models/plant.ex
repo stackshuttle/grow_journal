@@ -23,4 +23,15 @@ defmodule GrowJournal.Plant do
     model
     |> cast(params, @required_fields, @optional_fields)
   end
+
+  def create_qrcode(plant_id, url) do
+    qrcode = :qrcode.encode(url)
+    png = :qrcode_demo.simple_png_encode(qrcode)
+    short_path = "/plants/test.png"
+    qrcode_path = "#{System.cwd}/uploads#{short_path}"
+    :ok = :file.write_file(qrcode_path, png)
+    short_path
+  end
+
+
 end
