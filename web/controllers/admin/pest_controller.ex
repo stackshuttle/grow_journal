@@ -6,8 +6,21 @@ defmodule GrowJournal.Admin.PestController do
 
   import Ecto.Model, only: [build: 2]
 
+  plug :authenticate, "user" when action in [:index, :create, :update,
+                                             :edit, :delete, :show, :new]
   plug :scrub_params, "plant_id"
   plug :scrub_params, "pest" when action in [:create, :update]
+
+  defp authenticate(conn, _opts) do
+    if conn.assigns.current_user do
+      conn
+    else
+      conn
+      |> put_flash(:error, "You must be logged in to access that page")
+      |> redirect(to: page_path(conn, :index))
+      |> halt()
+    end
+  end
 
   def index(conn, %{"plant_id" => plant_id}) do
     pests = Repo.all(Pest)
@@ -42,10 +55,11 @@ defmodule GrowJournal.Admin.PestController do
     render(conn, "show.html", pest: pest)
   end
 
-  def edit(conn, %{"id" => id}) do
+  def edit(conn, %{"id" => id, "plant_id" => plant_id}) do
     pest = Repo.get!(Pest, id)
+    plant = Repo.get!(Plant, plant_id)
     changeset = Pest.changeset(pest)
-    render(conn, "edit.html", pest: pest, changeset: changeset)
+    render(conn, "edit.html", pest: pest, changeset: changeset, plant: plant)
   end
 
   def update(conn, %{"id" => id, "pest" => pest_params, "plant_id" =>

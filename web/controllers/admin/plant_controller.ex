@@ -3,7 +3,20 @@ defmodule GrowJournal.Admin.PlantController do
 
   alias GrowJournal.Plant
 
+  plug :authenticate, "user" when action in [:index, :create, :update,
+                                             :edit, :delete, :show, :new]
   plug :scrub_params, "plant" when action in [:create, :update]
+
+  defp authenticate(conn, _opts) do
+    if conn.assigns.current_user do
+      conn
+    else
+      conn
+      |> put_flash(:error, "You must be logged in to access that page")
+      |> redirect(to: page_path(conn, :index))
+      |> halt()
+    end
+  end
 
   defp build_plant_absolute_url(conn, plant_id) do
     port = ""

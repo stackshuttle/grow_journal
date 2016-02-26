@@ -6,8 +6,21 @@ defmodule GrowJournal.Admin.VarietyController do
 
   import Ecto.Model, only: [build: 2]
 
+  plug :authenticate, "user" when action in [:index, :create, :update,
+                                             :edit, :delete, :show, :new]
   plug :scrub_params, "plant_id"
   plug :scrub_params, "variety" when action in [:create, :update]
+
+  defp authenticate(conn, _opts) do
+    if conn.assigns.current_user do
+      conn
+    else
+      conn
+      |> put_flash(:error, "You must be logged in to access that page")
+      |> redirect(to: page_path(conn, :index))
+      |> halt()
+    end
+  end
 
   def index(conn, %{"plant_id" => plant_id}) do
     varieties = Repo.all(Variety)
