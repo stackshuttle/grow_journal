@@ -52,7 +52,8 @@ defmodule GrowJournal.User.UserPlantController do
   end
 
   def show(conn, %{"id" => id}) do
-    user_plant = Repo.get!(UserPlant, id) |> Repo.preload :plant
+    user_plant = Repo.get!(UserPlant, id)
+                  |> Repo.preload(:plant)
     render(conn, "show.html", user_plant: user_plant)
   end
 

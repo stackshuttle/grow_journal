@@ -33,7 +33,6 @@ defmodule GrowJournal.Router do
     get "/logout", SessionController, :delete
 
     resources "/user_plants", UserPlantController
-    resources "/events", EventController
     resources "/users", UserController, except: [:delete, :edit, :update]
   end
 
@@ -58,7 +57,9 @@ defmodule GrowJournal.Router do
   scope "/u", GrowJournal.User, as: :user do
     pipe_through :admin
 
-    resources "/plants", UserPlantController
+    resources "/plants", UserPlantController do
+      resources "/events", EventController
+    end
   end
 
 

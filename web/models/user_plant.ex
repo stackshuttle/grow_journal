@@ -4,6 +4,7 @@ defmodule GrowJournal.UserPlant do
   schema "user_plants" do
     belongs_to :user, GrowJournal.User
     belongs_to :plant, GrowJournal.Plant
+    has_many :events, GrowJournal.Event
 
     timestamps
   end
