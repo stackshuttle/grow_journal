@@ -39,5 +39,25 @@
   </tbody>
 </table>
 
-<%= link "Add disease", to: admin_plant_disease_path(@conn, :new, @plant.id) %>
+<h3>Common pests</h3>
+<table class="table table-hover">
+  <thead>
+    <th>Name</th>
+    <th></th>
+  </thead>
+  <tbody>
+    <%= for pest <- @plant.pests do %>
+    <tr>
+      <td><%= pest.name %></td>
+      <td class="text-right">
+        <%= link "Edit", to: admin_plant_pest_path(@conn, :edit, @plant.id, pest.id), class: "btn btn-default btn-xs" %>
+        <%= link "Delete", to: admin_plant_pest_path(@conn, :delete, @plant.id, pest.id), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
+      </td>
+    </tr>
+    <%= end %>
+
+  </tbody>
+</table>
+
+<%= link "Add Pest", to: admin_plant_pest_path(@conn, :new, @plant.id) %>
 <br/>

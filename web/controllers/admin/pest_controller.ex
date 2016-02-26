@@ -2,27 +2,36 @@ defmodule GrowJournal.Admin.PestController do
   use GrowJournal.Web, :controller
 
   alias GrowJournal.Pest
+  alias GrowJournal.Plant
 
+  import Ecto.Model, only: [build: 2]
+
+  plug :scrub_params, "plant_id"
   plug :scrub_params, "pest" when action in [:create, :update]
 
-  def index(conn, _params) do
+  def index(conn, %{"plant_id" => plant_id}) do
     pests = Repo.all(Pest)
-    render(conn, "index.html", pests: pests)
+    plant = Repo.get!(Plant, plant_id)
+    render(conn, "index.html", pests: pests, plant: plant)
   end
 
-  def new(conn, _params) do
+  def new(conn, %{"plant_id" => plant_id}) do
     changeset = Pest.changeset(%Pest{})
-    render(conn, "new.html", changeset: changeset)
+    plant = Repo.get!(Plant, plant_id)
+    render(conn, "new.html", changeset: changeset, plant: plant)
   end
 
-  def create(conn, %{"pest" => pest_params}) do
+  def create(conn, %{"pest" => pest_params, "plant_id" => plant_id}) do
     changeset = Pest.changeset(%Pest{}, pest_params)
+    plant = Repo.get!(Plant, plant_id)
+    changeset = build(plant, :pests)
+      |> Pest.changeset(pest_params)
 
     case Repo.insert(changeset) do
       {:ok, _pest} ->
         conn
         |> put_flash(:info, "Pest created successfully.")
-        |> redirect(to: admin_pest_path(conn, :index))
+        |> redirect(to: admin_plant_path(conn, :show, plant_id))
       {:error, changeset} ->
         render(conn, "new.html", changeset: changeset)
     end
@@ -39,7 +48,8 @@ defmodule GrowJournal.Admin.PestController do
     render(conn, "edit.html", pest: pest, changeset: changeset)
   end
 
-  def update(conn, %{"id" => id, "pest" => pest_params}) do
+  def update(conn, %{"id" => id, "pest" => pest_params, "plant_id" =>
+                     plant_id}) do
     pest = Repo.get!(Pest, id)
     changeset = Pest.changeset(pest, pest_params)
 
@@ -47,13 +57,13 @@ defmodule GrowJournal.Admin.PestController do
       {:ok, pest} ->
         conn
         |> put_flash(:info, "Pest updated successfully.")
-        |> redirect(to: admin_pest_path(conn, :show, pest))
+        |> redirect(to: admin_plant_pest_path(conn, :show, plant_id, pest))
       {:error, changeset} ->
         render(conn, "edit.html", pest: pest, changeset: changeset)
     end
   end
 
-  def delete(conn, %{"id" => id}) do
+  def delete(conn, %{"id" => id, "plant_id" => plant_id}) do
     pest = Repo.get!(Pest, id)
 
     # Here we use delete! (with a bang) because we expect
@@ -62,6 +72,6 @@ defmodule GrowJournal.Admin.PestController do
 
     conn
     |> put_flash(:info, "Pest deleted successfully.")
-    |> redirect(to: admin_pest_path(conn, :index))
+    |> redirect(to: admin_plant_pest_path(conn, :index, plant_id))
   end
 end

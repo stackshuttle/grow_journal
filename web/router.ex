@@ -43,8 +43,8 @@ defmodule GrowJournal.Router do
     resources "/users", UserController
     resources "/plants", PlantController do
       resources "/diseases", DiseaseController
+      resources "/pests", PestController
     end
-    resources "/pests", PestController
     resources "/variety", VarietyController
   end
 

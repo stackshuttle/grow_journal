@@ -1,6 +1,6 @@
 <h2>Edit pest</h2>
 
 <%= render "form.html", changeset: @changeset,
-                        action: admin_pest_path(@conn, :update, @pest) %>
+                        action: admin_plant_pest_path(@conn, :update, @plant, @pest) %>
 
-<%= link "Back", to: admin_pest_path(@conn, :index) %>
+<%= link "Back", to: admin_plant_pest_path(@conn, :index, @plant) %>

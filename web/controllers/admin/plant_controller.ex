@@ -56,6 +56,7 @@ defmodule GrowJournal.Admin.PlantController do
   def show(conn, %{"id" => id}) do
     plant = Repo.get!(Plant, id)
     plant = Repo.preload plant, :diseases
+    plant = Repo.preload plant, :pests
     render(conn, "show.html", plant: plant)
   end
 

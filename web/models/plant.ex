@@ -7,6 +7,7 @@ defmodule GrowJournal.Plant do
     field :description, :string
     field :qrcode_path, :string
     has_many :diseases, GrowJournal.Disease
+    has_many :pests, GrowJournal.Pest
 
     timestamps
   end
