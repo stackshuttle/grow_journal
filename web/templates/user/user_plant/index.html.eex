@@ -1,4 +1,4 @@
-<h2>Listing user plants</h2>
+<h2>My plants</h2>
 
 <table class="table">
   <thead>
@@ -11,7 +11,7 @@
   <tbody>
 <%= for user_plant <- @user_plants do %>
     <tr>
-      <td><%= user_plant.plant_id %></td>
+      <td><%= user_plant.plant.name %></td>
 
       <td class="text-right">
         <%= link "Show", to: user_user_plant_path(@conn, :show, user_plant), class: "btn btn-default btn-xs" %>
@@ -23,4 +23,4 @@
   </tbody>
 </table>
 
-<%= link "New user plant", to: user_user_plant_path(@conn, :new) %>
+<%= link "Add plant", to: user_user_plant_path(@conn, :new) %>
