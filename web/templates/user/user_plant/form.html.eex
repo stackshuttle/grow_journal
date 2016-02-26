@@ -5,6 +5,8 @@
     </div>
   <% end %>
 
+  <%= select f, :plant_id, Enum.map(@plants, fn p -> {p.name, p.id} end) %>
+
   <div class="form-group">
     <%= submit "Submit", class: "btn btn-primary" %>
   </div>

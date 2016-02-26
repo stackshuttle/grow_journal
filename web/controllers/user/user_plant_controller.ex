@@ -2,6 +2,10 @@ defmodule GrowJournal.User.UserPlantController do
   use GrowJournal.Web, :controller
 
   alias GrowJournal.UserPlant
+  alias GrowJournal.Plant
+  alias GrowJournal.User
+
+  import Ecto.Model, only: [build: 2]
 
   plug :scrub_params, "user_plant" when action in [:create, :update]
   plug :authenticate, "user" when action in [:index, :create, :update,
@@ -25,17 +29,22 @@ defmodule GrowJournal.User.UserPlantController do
 
   def new(conn, _params) do
     changeset = UserPlant.changeset(%UserPlant{})
-    render(conn, "new.html", changeset: changeset)
+    plants = Repo.all(Plant)
+    render(conn, "new.html", changeset: changeset, plants: plants)
   end
 
   def create(conn, %{"user_plant" => user_plant_params}) do
+    user_plant_params = Map.put(user_plant_params,
+                                "user", conn.assigns.current_user)
     changeset = UserPlant.changeset(%UserPlant{}, user_plant_params)
+    require IEx
+    IEx.pry
 
     case Repo.insert(changeset) do
-      {:ok, _user_plant} ->
+      {:ok, user_plant} ->
         conn
         |> put_flash(:info, "User plant created successfully.")
-        |> redirect(to: user_plant_path(conn, :index))
+        |> redirect(to: user_user_plant_path(conn, :index))
       {:error, changeset} ->
         render(conn, "new.html", changeset: changeset)
     end
@@ -48,8 +57,10 @@ defmodule GrowJournal.User.UserPlantController do
 
   def edit(conn, %{"id" => id}) do
     user_plant = Repo.get!(UserPlant, id)
+    plants = Repo.all(Plant)
     changeset = UserPlant.changeset(user_plant)
-    render(conn, "edit.html", user_plant: user_plant, changeset: changeset)
+    render(conn, "edit.html", user_plant: user_plant, changeset: changeset,
+           plants: plants)
   end
 
   def update(conn, %{"id" => id, "user_plant" => user_plant_params}) do
@@ -60,7 +71,7 @@ defmodule GrowJournal.User.UserPlantController do
       {:ok, user_plant} ->
         conn
         |> put_flash(:info, "User plant updated successfully.")
-        |> redirect(to: user_plant_path(conn, :show, user_plant))
+        |> redirect(to: user_user_plant_path(conn, :show, user_plant))
       {:error, changeset} ->
         render(conn, "edit.html", user_plant: user_plant, changeset: changeset)
     end
@@ -75,6 +86,6 @@ defmodule GrowJournal.User.UserPlantController do
 
     conn
     |> put_flash(:info, "User plant deleted successfully.")
-    |> redirect(to: user_plant_path(conn, :index))
+    |> redirect(to: user_user_plant_path(conn, :index))
   end
 end

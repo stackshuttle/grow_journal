@@ -8,7 +8,7 @@ defmodule GrowJournal.UserPlant do
     timestamps
   end
 
-  @required_fields ~w()
+  @required_fields ~w(plant_id)
   @optional_fields ~w()
 
   @doc """
