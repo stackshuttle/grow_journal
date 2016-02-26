@@ -8,5 +8,24 @@
   </li>
 
 </ul>
+<h3>List of events</h3>
+<table class="table table-hover">
+  <thead>
+    <th>Name</th>
+    <th>When</th>
+    <th>Description</th>
+    <th></th>
+  </thead>
+  <tbody>
+    <%= for event <- @user_plant.events do %>
+    <tr>
+      <td><%= event.name %></td>
+      <td><%= event.when %></td>
+      <td><%= event.description %></td>
+    </tr>
+    <%= end %>
+  </tbody>
+</table>
+<%= link "Add new event", to: user_user_plant_event_path(@conn, :new, @user_plant) %>
 
 <%= link "Back", to: user_user_plant_path(@conn, :index) %>
