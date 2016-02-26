@@ -18,4 +18,26 @@
 
 <strong>Description:</strong>
 <%= @plant.description %>
+
+<h3>Common diseases</h3>
+<table class="table table-hover">
+  <thead>
+    <th>Name</th>
+    <th></th>
+  </thead>
+  <tbody>
+    <%= for disease <- @plant.diseases do %>
+    <tr>
+      <td><%= disease.name %></td>
+      <td class="text-right">
+        <%= link "Edit", to: admin_plant_disease_path(@conn, :edit, @plant.id, disease.id), class: "btn btn-default btn-xs" %>
+        <%= link "Delete", to: admin_plant_disease_path(@conn, :delete, @plant.id, disease.id), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
+      </td>
+    </tr>
+    <%= end %>
+
+  </tbody>
+</table>
+
+<%= link "Add disease", to: admin_plant_disease_path(@conn, :new, @plant.id) %>
 <br/>

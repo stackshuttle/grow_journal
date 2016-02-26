@@ -41,9 +41,10 @@ defmodule GrowJournal.Router do
     pipe_through :admin
 
     resources "/users", UserController
-    resources "/plants", PlantController
+    resources "/plants", PlantController do
+      resources "/diseases", DiseaseController
+    end
     resources "/pests", PestController
-    resources "/diseases", DiseaseController
     resources "/variety", VarietyController
   end
 
@@ -52,7 +53,6 @@ defmodule GrowJournal.Router do
 
     get "/", PlantController, :index
     get "/:id/", PlantController, :show
-    get "/:id/diseases", DiseaseController, :index
   end
 
   # Other scopes may use custom stacks.

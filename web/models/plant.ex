@@ -6,6 +6,7 @@ defmodule GrowJournal.Plant do
     field :picture, :string
     field :description, :string
     field :qrcode_path, :string
+    has_many :diseases, GrowJournal.Disease
 
     timestamps
   end
@@ -32,6 +33,4 @@ defmodule GrowJournal.Plant do
     :ok = :file.write_file(qrcode_path, png)
     short_path
   end
-
-
 end

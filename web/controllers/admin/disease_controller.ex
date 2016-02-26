@@ -2,29 +2,39 @@ defmodule GrowJournal.Admin.DiseaseController do
   use GrowJournal.Web, :controller
 
   alias GrowJournal.Disease
+  alias GrowJournal.Plant
 
+  import Ecto.Model, only: [build: 2]
+
+  plug :scrub_params, "plant_id"
   plug :scrub_params, "disease" when action in [:create, :update]
 
-  def index(conn, _params) do
+  def index(conn, %{"plant_id" => plant_id}) do
     diseases = Repo.all(Disease)
-    render(conn, "index.html", diseases: diseases)
+    plant = Repo.get!(Plant, plant_id)
+    render(conn, "index.html", diseases: diseases, plant: plant)
   end
 
-  def new(conn, _params) do
+  def new(conn, %{"plant_id" => plant_id}) do
     changeset = Disease.changeset(%Disease{})
-    render(conn, "new.html", changeset: changeset)
+    plant = Repo.get!(Plant, plant_id)
+    render(conn, "new.html", changeset: changeset, plant: plant)
   end
 
-  def create(conn, %{"disease" => disease_params}) do
+  def create(conn, %{"disease" => disease_params, "plant_id" => plant_id}) do
     changeset = Disease.changeset(%Disease{}, disease_params)
+    plant = Repo.get!(Plant, plant_id)
+    changeset = build(plant, :diseases)
+      |> Disease.changeset(disease_params)
 
     case Repo.insert(changeset) do
-      {:ok, _disease} ->
+      {:ok, disease} ->
         conn
         |> put_flash(:info, "Disease created successfully.")
-        |> redirect(to: admin_disease_path(conn, :index))
+        |> redirect(to: admin_plant_path(conn, :show, plant_id))
       {:error, changeset} ->
-        render(conn, "new.html", changeset: changeset)
+        plant = Repo.get!(Plant, plant_id)
+        render(conn, "new.html", changeset: changeset, plant: plant)
     end
   end
 
@@ -39,7 +49,8 @@ defmodule GrowJournal.Admin.DiseaseController do
     render(conn, "edit.html", disease: disease, changeset: changeset)
   end
 
-  def update(conn, %{"id" => id, "disease" => disease_params}) do
+  def update(conn, %{"id" => id, "disease" => disease_params, "plant_id" 
+              => plant_id}) do
     disease = Repo.get!(Disease, id)
     changeset = Disease.changeset(disease, disease_params)
 
@@ -47,13 +58,14 @@ defmodule GrowJournal.Admin.DiseaseController do
       {:ok, disease} ->
         conn
         |> put_flash(:info, "Disease updated successfully.")
-        |> redirect(to: admin_disease_path(conn, :show, disease))
+        |> redirect(to: admin_plant_disease_path(conn, :show,
+                                                 plant_id, disease))
       {:error, changeset} ->
         render(conn, "edit.html", disease: disease, changeset: changeset)
     end
   end
 
-  def delete(conn, %{"id" => id}) do
+  def delete(conn, %{"id" => id, "plant_id" => plant_id}) do
     disease = Repo.get!(Disease, id)
 
     # Here we use delete! (with a bang) because we expect
@@ -62,6 +74,6 @@ defmodule GrowJournal.Admin.DiseaseController do
 
     conn
     |> put_flash(:info, "Disease deleted successfully.")
-    |> redirect(to: admin_disease_path(conn, :index))
+    |> redirect(to: admin_plant_disease_path(conn, :index, plant_id))
   end
 end
