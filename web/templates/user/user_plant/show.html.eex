@@ -14,5 +14,5 @@
 
 </ul>
 
-<%= link "Edit", to: user_plant_path(@conn, :edit, @user_plant) %>
-<%= link "Back", to: user_plant_path(@conn, :index) %>
+<%= link "Edit", to: user_user_plant_path(@conn, :edit, @user_plant) %>
+<%= link "Back", to: user_user_plant_path(@conn, :index) %>

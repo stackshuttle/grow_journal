@@ -55,6 +55,13 @@ defmodule GrowJournal.Router do
     get "/:id/", PlantController, :show
   end
 
+  scope "/u", GrowJournal.User, as: :user do
+    pipe_through :admin
+
+    resources "/plants", UserPlantController
+  end
+
+
   # Other scopes may use custom stacks.
   # scope "/api", GrowJournal do
   #   pipe_through :api

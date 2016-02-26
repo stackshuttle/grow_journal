@@ -1,9 +1,22 @@
-defmodule GrowJournal.UserPlantController do
+defmodule GrowJournal.User.UserPlantController do
   use GrowJournal.Web, :controller
 
   alias GrowJournal.UserPlant
 
   plug :scrub_params, "user_plant" when action in [:create, :update]
+  plug :authenticate, "user" when action in [:index, :create, :update,
+                                             :edit, :delete, :show, :new]
+
+  defp authenticate(conn, _opts) do
+    if conn.assigns.current_user do
+      conn
+    else
+      conn
+      |> put_flash(:error, "You must be logged in to access that page")
+      |> redirect(to: page_path(conn, :index))
+      |> halt()
+    end
+  end
 
   def index(conn, _params) do
     user_plants = Repo.all(UserPlant)

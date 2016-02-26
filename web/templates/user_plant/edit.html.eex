@@ -1,6 +1,0 @@
-<h2>Edit user plant</h2>
-
-<%= render "form.html", changeset: @changeset,
-                        action: user_plant_path(@conn, :update, @user_plant) %>
-
-<%= link "Back", to: user_plant_path(@conn, :index) %>
