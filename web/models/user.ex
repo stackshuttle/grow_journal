@@ -6,6 +6,7 @@ defmodule GrowJournal.User do
     field :email, :string
     field :password, :string, virtual: true
     field :password_hash, :string
+    has_many :user_plants, GrowJournal.UserPlant
 
     timestamps
   end

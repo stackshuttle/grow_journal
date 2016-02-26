@@ -34,11 +34,9 @@ defmodule GrowJournal.User.UserPlantController do
   end
 
   def create(conn, %{"user_plant" => user_plant_params}) do
-    user_plant_params = Map.put(user_plant_params,
-                                "user", conn.assigns.current_user)
-    changeset = UserPlant.changeset(%UserPlant{}, user_plant_params)
-    require IEx
-    IEx.pry
+    user = conn.assigns.current_user
+    changeset = build(user, :user_plants)
+                |> UserPlant.changeset(user_plant_params)
 
     case Repo.insert(changeset) do
       {:ok, user_plant} ->
