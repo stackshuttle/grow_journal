@@ -23,7 +23,9 @@ defmodule GrowJournal.User.UserPlantController do
   end
 
   def index(conn, _params) do
-    user_plants = Repo.all(UserPlant)
+    query = from up in UserPlant,               
+      where: up.user_id == ^conn.assigns.current_user.id
+    user_plants = Repo.all(query)
     render(conn, "index.html", user_plants: user_plants)
   end
 
