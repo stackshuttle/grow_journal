@@ -4,7 +4,7 @@
 
   <li>
     <strong>Plant:</strong>
-    <%= @user_plant.plant_id %>
+    <%= @user_plant.plant.name %>
   </li>
 
 </ul>
