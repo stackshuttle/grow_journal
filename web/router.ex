@@ -44,8 +44,8 @@ defmodule GrowJournal.Router do
     resources "/plants", PlantController do
       resources "/diseases", DiseaseController
       resources "/pests", PestController
+      resources "/variety", VarietyController
     end
-    resources "/variety", VarietyController
   end
 
   scope "/plants", GrowJournal, as: :plants do

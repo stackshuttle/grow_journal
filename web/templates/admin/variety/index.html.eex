@@ -16,13 +16,13 @@
       <td><%= variety.name %></td>
 
       <td class="text-right">
-        <%= link "Show", to: admin_variety_path(@conn, :show, variety), class: "btn btn-default btn-xs" %>
-        <%= link "Edit", to: admin_variety_path(@conn, :edit, variety), class: "btn btn-default btn-xs" %>
-        <%= link "Delete", to: admin_variety_path(@conn, :delete, variety), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
+        <%= link "Show", to: admin_plant_variety_path(@conn, :show, @plant, variety), class: "btn btn-default btn-xs" %>
+        <%= link "Edit", to: admin_plant_variety_path(@conn, :edit, @plant, variety), class: "btn btn-default btn-xs" %>
+        <%= link "Delete", to: admin_plant_variety_path(@conn, :delete, @plant, variety), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
       </td>
     </tr>
 <% end %>
   </tbody>
 </table>
 
-<%= link "New variety", to: admin_variety_path(@conn, :new) %>
+<%= link "New variety", to: admin_plant_variety_path(@conn, :new, @plant) %>

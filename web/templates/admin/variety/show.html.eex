@@ -14,5 +14,5 @@
 
 </ul>
 
-<%= link "Edit", to: admin_variety_path(@conn, :edit, @variety) %>
-<%= link "Back", to: admin_variety_path(@conn, :index) %>
+<%= link "Edit", to: admin_plant_variety_path(@conn, :edit, @plant, @variety) %>
+<%= link "Back", to: admin_plant_variety_path(@conn, :index, @plant) %>
