@@ -1,0 +1,4 @@
+<h2>My dashboard</h2>
+
+<h3>My actions</h3>
+<%= link "Add plant", to: user_user_plant_path(@conn, :new) %>

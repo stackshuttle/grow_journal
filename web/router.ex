@@ -57,6 +57,8 @@ defmodule GrowJournal.Router do
   scope "/u", GrowJournal.User, as: :user do
     pipe_through :admin
 
+    get "/", UserHomeController, :index
+
     resources "/plants", UserPlantController do
       resources "/events", EventController
     end
