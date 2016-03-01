@@ -27,6 +27,7 @@ defmodule GrowJournal.User.UserPlantController do
       where: up.user_id == ^conn.assigns.current_user.id
     user_plants = Repo.all(query)
                   |> Repo.preload(:plant)
+                  |> Repo.preload(:events)
     render(conn, "index.html", user_plants: user_plants)
   end
 

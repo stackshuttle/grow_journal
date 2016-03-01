@@ -4,6 +4,7 @@
   <thead>
     <tr>
       <th>Plant</th>
+      <th>Events</th>
 
       <th></th>
     </tr>
@@ -12,6 +13,7 @@
 <%= for user_plant <- @user_plants do %>
     <tr>
       <td><%= user_plant.plant.name %></td>
+      <td><%= number_events user_plant %></td>
 
       <td class="text-right">
         <%= link "Show", to: user_user_plant_path(@conn, :show, user_plant), class: "btn btn-default btn-xs" %>
