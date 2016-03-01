@@ -1,4 +1,5 @@
 <h2>My dashboard</h2>
 
 <h3>My actions</h3>
-<%= link "Add plant", to: user_user_plant_path(@conn, :new) %>
+<%= link "Add plant", to: user_user_plant_path(@conn, :new), class: "btn btn-primary" %>
+<%= link "View my plants", to: user_user_plant_path(@conn, :index), class: "btn btn-default" %>
