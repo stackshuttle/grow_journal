@@ -59,6 +59,10 @@ defmodule GrowJournal.Router do
 
     get "/", UserHomeController, :index
 
+    get "/change_password", UserHomeController, :change_password
+    post "/change_password", UserHomeController, :update_change_password
+    put "/change_password", UserHomeController, :update_change_password
+
     resources "/plants", UserPlantController do
       resources "/events", EventController
     end

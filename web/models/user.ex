@@ -33,6 +33,13 @@ defmodule GrowJournal.User do
     |> put_pass_hash()
   end
 
+  def password_changeset(model, params \\ :empty) do
+    model
+    |> cast(params, ~w(password), ~w())
+    |> validate_confirmation(:password)
+    |> put_pass_hash()
+  end
+
   defp put_pass_hash(changeset) do
     case changeset do
       %Ecto.Changeset{valid?: true, changes: %{password: pass}} ->
