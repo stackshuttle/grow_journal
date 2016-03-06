@@ -18,20 +18,6 @@ defmodule GrowJournal.Admin.PlantController do
     end
   end
 
-  defp build_plant_absolute_url(conn, plant_id) do
-    port = ""
-    if conn.port != 80 do
-      port = ":#{conn.port}"
-    end
-
-    http = "http://"
-    if conn.scheme != :http do
-      http = "https://"
-    end
-
-    "#{http}#{conn.host}#{port}#{admin_plant_path(conn, :show, plant_id)}"
-  end
-
   def index(conn, _params) do
     plants = Repo.all(Plant)
     render(conn, "index.html", plants: plants)
@@ -54,10 +40,6 @@ defmodule GrowJournal.Admin.PlantController do
 
     case Repo.insert(changeset) do
       {:ok, plant} ->
-        url = build_plant_absolute_url(conn, plant.id)
-        qrcode = Plant.create_qrcode(plant.id, url)
-        plant = %Plant{plant| :qrcode_path => qrcode}
-        Repo.update(plant)
         conn
         |> put_flash(:info, "Plant created successfully.")
         |> redirect(to: admin_plant_path(conn, :index))

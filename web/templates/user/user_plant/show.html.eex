@@ -1,4 +1,8 @@
 <h2><%= @user_plant.plant.name %></h2>
+
+<strong>QR Code:</strong>
+<img src="/media<%= @user_plant.qrcode_path %>" />
+
 <h3>Last events</h3>
 <table class="table table-hover">
   <thead>
