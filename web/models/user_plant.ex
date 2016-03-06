@@ -30,7 +30,7 @@ defmodule GrowJournal.UserPlant do
     short_path = "/#{user_id}/user_plants/#{user_plant_id}.png"
 
     # folder to create if it doesn't exist
-    folder_path = "#{System.cwd}/uploads/#{user_id}/user_plants"
+    folder_path = "#{System.cwd}/media/#{user_id}/user_plants"
     full_path = "#{folder_path}/#{user_plant_id}.png"
     if not File.exists?(folder_path) do
       File.mkdir_p(folder_path)

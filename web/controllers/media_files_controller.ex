@@ -2,7 +2,7 @@ defmodule GrowJournal.MediaFilesController do
   use GrowJournal.Web, :controller
   import Plug.Conn
 
-  @media_folder "/uploads"
+  @media_folder "/media"
 
   def download(conn, %{"filepath" => filepath}) do
     filepath = Enum.join(filepath, "/")
