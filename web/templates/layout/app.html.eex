@@ -31,6 +31,8 @@
             <li><%= link "Admin area", to: admin_user_path(@conn, :index) %></li>
             <li><%= link "My dashboard", to: user_user_home_path(@conn, :index) %></li>
             <li role="separator" class="divider"></li>
+            <li><%= link "Change my password", to: user_user_home_path(@conn, :change_password) %></li>
+            <li role="separator" class="divider"></li>
             <li><%= link "Logout", to: session_path(@conn, :delete) %></li>
           </ul>
         </li>
