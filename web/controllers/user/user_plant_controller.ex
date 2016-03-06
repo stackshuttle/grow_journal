@@ -11,7 +11,7 @@ defmodule GrowJournal.User.UserPlantController do
   plug :authenticate, "user" when action in [:index, :create, :update,
                                              :edit, :delete, :show, :new]
 
-  defp build_plant_absolute_url(conn, plant_id) do
+  defp build_plant_absolute_url(conn, user_plant_id) do
     port = ""
     if conn.port != 80 do
       port = ":#{conn.port}"
@@ -22,7 +22,7 @@ defmodule GrowJournal.User.UserPlantController do
       http = "https://"
     end
 
-    "#{http}#{conn.host}#{port}#{admin_plant_path(conn, :show, plant_id)}"
+    "#{http}#{conn.host}#{port}#{user_user_plant_path(conn, :show, user_plant_id)}"
   end
 
   defp authenticate(conn, _opts) do
@@ -59,7 +59,8 @@ defmodule GrowJournal.User.UserPlantController do
     case Repo.insert(changeset) do
       {:ok, user_plant} ->
         url = build_plant_absolute_url(conn, user_plant.id)
-        qrcode = UserPlant.create_qrcode(user_plant.id, url)
+        qrcode = UserPlant.create_qrcode(conn.assigns.current_user.id,
+                                         user_plant.id, url)
         user_plant = %UserPlant{user_plant| :qrcode_path => qrcode}
         Repo.update(user_plant)
         conn

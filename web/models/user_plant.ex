@@ -24,12 +24,18 @@ defmodule GrowJournal.UserPlant do
     |> cast(params, @required_fields, @optional_fields)
   end
 
-  def create_qrcode(plant_id, url) do
+  def create_qrcode(user_id, user_plant_id, url) do
     qrcode = :qrcode.encode(url)
     png = :qrcode_demo.simple_png_encode(qrcode)
-    short_path = "/plants/test.png"
-    qrcode_path = "#{System.cwd}/uploads#{short_path}"
-    :ok = :file.write_file(qrcode_path, png)
+    short_path = "/#{user_id}/user_plants/#{user_plant_id}.png"
+
+    # folder to create if it doesn't exist
+    folder_path = "#{System.cwd}/uploads/#{user_id}/user_plants"
+    full_path = "#{folder_path}/#{user_plant_id}.png"
+    if not File.exists?(folder_path) do
+      File.mkdir_p(folder_path)
+    end
+    :ok = :file.write_file(full_path, png)
     short_path
   end
 end
