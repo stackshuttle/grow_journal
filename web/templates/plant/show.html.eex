@@ -6,9 +6,6 @@
 <%= @plant.name %>
 <br />
 
-<strong>QR Code:</strong>
-<img src="/media<%= @plant.qrcode_path %>" />
-
 <strong>Picture:</strong>
 <img src="/media<%= @plant.picture %>" />
 <br />
