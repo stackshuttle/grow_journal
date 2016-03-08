@@ -6,6 +6,7 @@ defmodule GrowJournal.UserPlant do
     belongs_to :plant, GrowJournal.Plant
     has_many :events, GrowJournal.Event
     field :qrcode_path, :string
+    has_many :pictures, GrowJournal.Picture
 
     timestamps
   end
