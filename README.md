@@ -14,6 +14,14 @@ Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
 
 Ready to run in production? Please [check our deployment guides](http://www.phoenixframework.org/docs/deployment).
 
+## Features
+
+ * Keep a journal of the plants you grow
+ * Get information on how to grow your plants
+ * Keep a photo album of your growths
+ * Print QR barcodes and stick them close to your plants, so you can scan
+   the barcode with your phone and add events in no time
+
 ## Learn more
 
   * Official website: http://www.phoenixframework.org/
