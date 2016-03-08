@@ -65,6 +65,7 @@ defmodule GrowJournal.Router do
 
     resources "/plants", UserPlantController do
       resources "/events", EventController
+      resources "/pictures", PictureController
     end
   end
 
