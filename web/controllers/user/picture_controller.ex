@@ -20,6 +20,10 @@ defmodule GrowJournal.User.PictureController do
   end
 
   def create(conn, %{"picture" => picture_params, "user_plant_id" => user_plant_id}) do
+    file = picture_params["path"]
+    short_path = "#{conn.assigns.current_user.id}/user_plants/#{user_plant_id}/pictures/#{file.filename}"
+    full_path = System.cwd() <> "/media/" <> short_path
+    picture_params = %{picture_params| "path" => short_path}
     changeset = Picture.changeset(%Picture{}, picture_params)
     user_plant = Repo.get!(UserPlant, user_plant_id)
     changeset = build(user_plant, :pictures)
@@ -27,6 +31,7 @@ defmodule GrowJournal.User.PictureController do
 
     case Repo.insert(changeset) do
       {:ok, _picture} ->
+        {:ok, _} = File.cp file.path, full_path
         conn
         |> put_flash(:info, "Picture created successfully.")
         |> redirect(to: user_user_plant_path(conn, :show, user_plant_id))

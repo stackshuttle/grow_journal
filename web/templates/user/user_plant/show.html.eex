@@ -33,7 +33,7 @@
   <tbody>
     <%= for picture <- @user_plant.pictures do %>
     <tr>
-      <td><%= picture.path %></td>
+      <td><img src="/media/<%= picture.path %>" alt="<%= picture.path %>" /></td>
       <td><%= picture.description %></td>
       <td>
         <%= link "Show", to: user_user_plant_picture_path(@conn, :show, @user_plant, picture), class: "btn btn-default btn-xs" %>
