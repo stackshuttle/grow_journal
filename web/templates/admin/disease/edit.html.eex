@@ -1,6 +1,6 @@
 <h2>Edit disease</h2>
 
-<%= %>render "form.html", changeset: @changeset,
-                        action: admin_disease_path(@conn, :update, @disease) %>
+<%= render "form.html", changeset: @changeset,
+                        action: admin_plant_disease_path(@conn, :update, @plant, @disease) %>
 
-                        <%= %> link "Back", to: admin_disease_path(@conn, :index) %>
+                        <%= link "Back", to: admin_plant_path(@conn, :show, @plant) %>

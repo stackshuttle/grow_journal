@@ -3,4 +3,4 @@
 <%= render "form.html", changeset: @changeset,
                         action: admin_plant_pest_path(@conn, :update, @plant, @pest) %>
 
-<%= link "Back", to: admin_plant_pest_path(@conn, :index, @plant) %>
+<%= link "Back", to: admin_plant_path(@conn, :show, @plant) %>

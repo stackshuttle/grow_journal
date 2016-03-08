@@ -3,7 +3,7 @@
 GrowJournal is a web application that allows you to keep track
 of the growth of your plants (vegetables, fruits or flowers).
 
-To start your Phoenix app:
+To start your GrowJournal app:
 
   * Install dependencies with `mix deps.get`
   * Create and migrate your database with `mix ecto.create && mix ecto.migrate`
@@ -14,6 +14,14 @@ Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
 
 Ready to run in production? Please [check our deployment guides](http://www.phoenixframework.org/docs/deployment).
 
+## Features
+
+ * Keep a journal of the plants you grow
+ * Get information on how to grow your plants
+ * Keep a photo album of your growths
+ * Print QR barcodes and stick them close to your plants, so you can scan
+   the barcode with your phone and add events in no time
+
 ## Learn more
 
   * Official website: http://www.phoenixframework.org/
@@ -23,6 +31,10 @@ Ready to run in production? Please [check our deployment guides](http://www.phoe
   * Source: https://github.com/phoenixframework/phoenix
 
 ## Design
+
+In this section, we give a bit of information on
+the internal structure of GrowJournal. Let us know what you would like to see
+in this section.
 
 ### Models
 Models are listed in alphabetical order.
@@ -110,14 +122,45 @@ Plants have different varieties.
 
 ### Controllers
 
+#### admin
+
 `admin` is a folder containing controllers only accessible to admin users (not implemented).
 It is represented as a scope in the router.
 In the current implementation, all users are admin, there is no flag to differentiate them.
+It defines all actions that are available to administrators and is available
+in the `/admin/` scope.
+
+In this folder, we have a few controllers:
+
+ * `disease_controller.ex`: `new`/`create`//`edit`/`update`/`delete` actions.
+   `index` and `show` should be removed.
+ * `pest_controller.ex`: `new`/`create`/`edit`/`update`/`delete` actions.
+   `index` and `show` should be removed.
+ * `plant_controller.ex`: all actions on plants. In `show`, we are also listing
+   the plant's diseases/pests and varieties.
+ * `user_controller.ex`: all actions on users.
+ * `variety_controller.ex`: `new`/`edit`/`delete` actions.
+   `index` and `show` should be removed.
+
+#### user
+
 
 `user` is a folder containing controllers only accessible to them
 The current implementation doesn’t make a difference between users,
 i.e userA could edit userB’s user plants. It is not shown on the interface, but by manipulating
 URLs, it is possible. This will need to be fixed in the future.
+It defines all actions that are available to users, and is available in the `/u/`
+scope.
+
+In this folder, we have a few controllers:
+
+ * `event_controller.ex`: `new`/`create`/`edit`/`update`/`delete` actions.
+   `index` and `show` should be removed.
+ * `picture_controller.ex`: all actions on pictures.
+ * `user_controller.ex`: `index`/`new`/`create`/`edit`/`update`/`show` actions.
+ * `user_home_controller.ex`: `index`/`update_change_password`/`change_password` actions.
+ * `user_plant_controller.ex`:  all actions to create UserPlants (plants the user grows)
+
 
 `auth_controller.ex`: inspired by “Programming Phoenix” by Chris McCord, Bruce Tate and José Valim.
 

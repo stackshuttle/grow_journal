@@ -1,3 +1,4 @@
+<%= link "Go to plants", to: admin_plant_path(@conn, :index), class: "btn btn-default" %>
 <h2>Listing users</h2>
 
 <table class="table">
