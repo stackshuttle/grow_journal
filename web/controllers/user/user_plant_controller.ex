@@ -51,6 +51,14 @@ defmodule GrowJournal.User.UserPlantController do
     render(conn, "new.html", changeset: changeset, plants: plants)
   end
 
+  defp build_media_folder_structure_for_user(user, user_plant) do
+    # folder to create if it doesn't exist
+    folder_path = "#{System.cwd}/media/#{user.id}/user_plants/#{user_plant.id}/pictures"
+    if not File.exists?(folder_path) do
+      :ok = File.mkdir_p(folder_path)
+    end
+  end
+
   def create(conn, %{"user_plant" => user_plant_params}) do
     user = conn.assigns.current_user
     changeset = build(user, :user_plants)
@@ -58,6 +66,8 @@ defmodule GrowJournal.User.UserPlantController do
 
     case Repo.insert(changeset) do
       {:ok, user_plant} ->
+        build_media_folder_structure_for_user(conn.assigns.current_user,
+                                              user_plant)
         url = build_plant_absolute_url(conn, user_plant.id)
         qrcode = UserPlant.create_qrcode(conn.assigns.current_user.id,
                                          user_plant.id, url)

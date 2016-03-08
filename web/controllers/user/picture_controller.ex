@@ -31,7 +31,7 @@ defmodule GrowJournal.User.PictureController do
 
     case Repo.insert(changeset) do
       {:ok, _picture} ->
-        {:ok, _} = File.cp file.path, full_path
+        :ok = File.cp file.path, full_path
         conn
         |> put_flash(:info, "Picture created successfully.")
         |> redirect(to: user_user_plant_path(conn, :show, user_plant_id))
