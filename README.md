@@ -3,7 +3,7 @@
 GrowJournal is a web application that allows you to keep track
 of the growth of your plants (vegetables, fruits or flowers).
 
-To start your Phoenix app:
+To start your GrowJournal app:
 
   * Install dependencies with `mix deps.get`
   * Create and migrate your database with `mix ecto.create && mix ecto.migrate`
@@ -31,6 +31,10 @@ Ready to run in production? Please [check our deployment guides](http://www.phoe
   * Source: https://github.com/phoenixframework/phoenix
 
 ## Design
+
+In this section, we give a bit of information on
+the internal structure of GrowJournal. Let us know what you would like to see
+in this section.
 
 ### Models
 Models are listed in alphabetical order.
