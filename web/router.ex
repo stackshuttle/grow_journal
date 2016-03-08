@@ -41,9 +41,9 @@ defmodule GrowJournal.Router do
 
     resources "/users", UserController
     resources "/plants", PlantController do
-      resources "/diseases", DiseaseController
-      resources "/pests", PestController
-      resources "/variety", VarietyController
+      resources "/diseases", DiseaseController, except: [:index, :show]
+      resources "/pests", PestController, except: [:index, :show]
+      resources "/variety", VarietyController, except: [:index, :show]
     end
   end
 

@@ -22,12 +22,6 @@ defmodule GrowJournal.Admin.PestController do
     end
   end
 
-  def index(conn, %{"plant_id" => plant_id}) do
-    pests = Repo.all(Pest)
-    plant = Repo.get!(Plant, plant_id)
-    render(conn, "index.html", pests: pests, plant: plant)
-  end
-
   def new(conn, %{"plant_id" => plant_id}) do
     changeset = Pest.changeset(%Pest{})
     plant = Repo.get!(Plant, plant_id)
@@ -50,11 +44,6 @@ defmodule GrowJournal.Admin.PestController do
     end
   end
 
-  def show(conn, %{"id" => id}) do
-    pest = Repo.get!(Pest, id)
-    render(conn, "show.html", pest: pest)
-  end
-
   def edit(conn, %{"id" => id, "plant_id" => plant_id}) do
     pest = Repo.get!(Pest, id)
     plant = Repo.get!(Plant, plant_id)
@@ -71,7 +60,7 @@ defmodule GrowJournal.Admin.PestController do
       {:ok, pest} ->
         conn
         |> put_flash(:info, "Pest updated successfully.")
-        |> redirect(to: admin_plant_pest_path(conn, :show, plant_id, pest))
+        |> redirect(to: admin_plant_path(conn, :show, plant_id))
       {:error, changeset} ->
         render(conn, "edit.html", pest: pest, changeset: changeset)
     end
@@ -86,6 +75,6 @@ defmodule GrowJournal.Admin.PestController do
 
     conn
     |> put_flash(:info, "Pest deleted successfully.")
-    |> redirect(to: admin_plant_pest_path(conn, :index, plant_id))
+    |> redirect(to: admin_plant_path(conn, :show, plant_id))
   end
 end

@@ -22,12 +22,6 @@ defmodule GrowJournal.Admin.DiseaseController do
     end
   end
 
-  def index(conn, %{"plant_id" => plant_id}) do
-    diseases = Repo.all(Disease)
-    plant = Repo.get!(Plant, plant_id)
-    render(conn, "index.html", diseases: diseases, plant: plant)
-  end
-
   def new(conn, %{"plant_id" => plant_id}) do
     changeset = Disease.changeset(%Disease{})
     plant = Repo.get!(Plant, plant_id)
@@ -51,30 +45,26 @@ defmodule GrowJournal.Admin.DiseaseController do
     end
   end
 
-  def show(conn, %{"id" => id}) do
-    disease = Repo.get!(Disease, id)
-    render(conn, "show.html", disease: disease)
-  end
-
-  def edit(conn, %{"id" => id}) do
+  def edit(conn, %{"id" => id, "plant_id" => plant_id}) do
     disease = Repo.get!(Disease, id)
     changeset = Disease.changeset(disease)
-    render(conn, "edit.html", disease: disease, changeset: changeset)
+    plant = Repo.get!(Plant, plant_id)
+    render(conn, "edit.html", disease: disease, changeset: changeset, plant: plant)
   end
 
-  def update(conn, %{"id" => id, "disease" => disease_params, "plant_id" 
-              => plant_id}) do
+  def update(conn, %{"id" => id, "disease" => disease_params,
+                     "plant_id" => plant_id}) do
     disease = Repo.get!(Disease, id)
     changeset = Disease.changeset(disease, disease_params)
+    plant = Repo.get!(Plant, plant_id)
 
     case Repo.update(changeset) do
       {:ok, disease} ->
         conn
         |> put_flash(:info, "Disease updated successfully.")
-        |> redirect(to: admin_plant_disease_path(conn, :show,
-                                                 plant_id, disease))
+        |> redirect(to: admin_plant_path(conn, :show, plant_id))
       {:error, changeset} ->
-        render(conn, "edit.html", disease: disease, changeset: changeset)
+        render(conn, "edit.html", disease: disease, changeset: changeset, plant: plant)
     end
   end
 
