@@ -122,14 +122,45 @@ Plants have different varieties.
 
 ### Controllers
 
+#### admin
+
 `admin` is a folder containing controllers only accessible to admin users (not implemented).
 It is represented as a scope in the router.
 In the current implementation, all users are admin, there is no flag to differentiate them.
+It defines all actions that are available to administrators and is available
+in the `/admin/` scope.
+
+In this folder, we have a few controllers:
+
+ * `disease_controller.ex`: `new`/`create`//`edit`/`update`/`delete` actions.
+   `index` and `show` should be removed.
+ * `pest_controller.ex`: `new`/`create`/`edit`/`update`/`delete` actions.
+   `index` and `show` should be removed.
+ * `plant_controller.ex`: all actions on plants. In `show`, we are also listing
+   the plant's diseases/pests and varieties.
+ * `user_controller.ex`: all actions on users.
+ * `variety_controller.ex`: `new`/`edit`/`delete` actions.
+   `index` and `show` should be removed.
+
+#### user
+
 
 `user` is a folder containing controllers only accessible to them
 The current implementation doesn’t make a difference between users,
 i.e userA could edit userB’s user plants. It is not shown on the interface, but by manipulating
 URLs, it is possible. This will need to be fixed in the future.
+It defines all actions that are available to users, and is available in the `/u/`
+scope.
+
+In this folder, we have a few controllers:
+
+ * `event_controller.ex`: `new`/`create`/`edit`/`update`/`delete` actions.
+   `index` and `show` should be removed.
+ * `picture_controller.ex`: all actions on pictures.
+ * `user_controller.ex`: `index`/`new`/`create`/`edit`/`update`/`show` actions.
+ * `user_home_controller.ex`: `index`/`update_change_password`/`change_password` actions.
+ * `user_plant_controller.ex`:  all actions to create UserPlants (plants the user grows)
+
 
 `auth_controller.ex`: inspired by “Programming Phoenix” by Chris McCord, Bruce Tate and José Valim.
 
