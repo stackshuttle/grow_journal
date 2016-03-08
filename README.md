@@ -103,3 +103,32 @@ Fields:
  * plant: reference to Plant. A variety belongs to a plant.
 
 Plants have different varieties.
+
+
+### Controllers
+
+`admin` is a folder containing controllers only accessible to admin users (not implemented).
+It is represented as a scope in the router.
+In the current implementation, all users are admin, there is no flag to differentiate them.
+
+`user` is a folder containing controllers only accessible to them
+The current implementation doesn’t make a difference between users,
+i.e userA could edit userB’s user plants. It is not shown on the interface, but by manipulating
+URLs, it is possible. This will need to be fixed in the future.
+
+auth_controller: inspired by “Programming Phoenix” by Chris McCord, Bruce Tate and José Valim.
+
+
+
+## Things to do:
+
+ * Implement the photo album (some of it is done, but nothing is checked in at the moment)
+ * Secure personal area (i.e we need to make sure the ids passed in requests belong to the user)
+ * Add a way to create admin users. We will need an extra flag on the User model as well.
+ * Delete some pages (listing events is useless since it’s already visible on the user plant for example)
+ * Improve workflow. After adding an event, make sure it redirects to th right page.
+   We need to ensure consistency across the different pages
+ * Improve style (switch to bourbon in the mean time)
+ * Convert website to react
+ * make mobile app?
+ * Ideas? Contribute to this document!
