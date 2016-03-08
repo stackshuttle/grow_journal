@@ -1,5 +1,8 @@
 # GrowJournal
 
+GrowJournal is a web application that allows you to keep track
+of the growth of your plants (vegetables, fruits or flowers).
+
 To start your Phoenix app:
 
   * Install dependencies with `mix deps.get`
@@ -116,7 +119,20 @@ The current implementation doesn’t make a difference between users,
 i.e userA could edit userB’s user plants. It is not shown on the interface, but by manipulating
 URLs, it is possible. This will need to be fixed in the future.
 
-auth_controller: inspired by “Programming Phoenix” by Chris McCord, Bruce Tate and José Valim.
+`auth_controller.ex`: inspired by “Programming Phoenix” by Chris McCord, Bruce Tate and José Valim.
+
+`disease_controller.ex`: this needs to be removed.
+
+`media_files_controller.ex`: a controller for media files. Media files are files available to users,
+such as uploaded images, qr barcodes and so on.
+This should ensure a user is only downloads their own files.
+
+`page_controller.ex`: front page controller. Created by phoenix.
+`plant_controller.ex`: the plant controller is for the
+public information related to plants.
+Note: we don't need disease/pest/variety controllers because this is part of
+
+`session_controller.ex`: inspired by “Programming Phoenix” by Chris McCord, Bruce Tate and José Valim.
 
 
 
