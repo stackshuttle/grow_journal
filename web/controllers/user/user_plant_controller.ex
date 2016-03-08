@@ -75,6 +75,7 @@ defmodule GrowJournal.User.UserPlantController do
     user_plant = Repo.get!(UserPlant, id)
                   |> Repo.preload(:plant)
                   |> Repo.preload(:events)
+                  |> Repo.preload(:pictures)
     render(conn, "show.html", user_plant: user_plant)
   end
 
