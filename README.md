@@ -60,7 +60,7 @@ Fields:
 * description: string
 * user_plant: reference to UserPlant. A picture belongs to a UserPlant.
 Pictures are associated to plants users grow. The pictures represent the photo
-album of the plant growth. (Functionality not present yet).
+album of the plant growth.
 
 #### Plant
 Fields:
