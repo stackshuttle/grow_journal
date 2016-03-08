@@ -22,4 +22,9 @@ defmodule GrowJournal.Picture do
     model
     |> cast(params, @required_fields, @optional_fields)
   end
+
+  def edit_changeset(model, params \\ :empty) do
+    model
+    |> cast(params, ~w(), ~w(description))
+  end
 end

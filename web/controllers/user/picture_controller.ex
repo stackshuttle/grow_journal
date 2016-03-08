@@ -44,7 +44,7 @@ defmodule GrowJournal.User.PictureController do
   def edit(conn, %{"id" => id, "user_plant_id" => user_plant_id}) do
     picture = Repo.get!(Picture, id)
     user_plant = Repo.get!(UserPlant, user_plant_id)
-    changeset = Picture.changeset(picture)
+    changeset = Picture.edit_changeset(picture)
     render(conn, "edit.html", picture: picture, changeset: changeset,
            user_plant: user_plant)
   end
@@ -52,7 +52,7 @@ defmodule GrowJournal.User.PictureController do
   def update(conn, %{"id" => id, "picture" => picture_params, "user_plant_id" =>
                      user_plant_id}) do
     picture = Repo.get!(Picture, id)
-    changeset = Picture.changeset(picture, picture_params)
+    changeset = Picture.edit_changeset(picture, picture_params)
 
     case Repo.update(changeset) do
       {:ok, picture} ->
