@@ -7,12 +7,6 @@ defmodule GrowJournal.User.PictureController do
   plug :scrub_params, "user_plant_id"
   plug :scrub_params, "picture" when action in [:create, :update]
 
-  def index(conn, %{"user_plant_id" => user_plant_id}) do
-    pictures = Repo.all(Picture)
-    user_plant = Repo.get!(UserPlant, user_plant_id)
-    render(conn, "index.html", pictures: pictures, user_plant: user_plant)
-  end
-
   def new(conn, %{"user_plant_id" => user_plant_id}) do
     changeset = Picture.changeset(%Picture{})
     user_plant = Repo.get!(UserPlant, user_plant_id)

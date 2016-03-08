@@ -64,8 +64,8 @@ defmodule GrowJournal.Router do
     put "/change_password", UserHomeController, :update_change_password
 
     resources "/plants", UserPlantController do
-      resources "/events", EventController
-      resources "/pictures", PictureController
+      resources "/events", EventController, except: [:index]
+      resources "/pictures", PictureController, except: [:index]
     end
   end
 
