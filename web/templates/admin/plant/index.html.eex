@@ -24,3 +24,4 @@
 <% end %>
   </tbody>
 </table>
+<%= link "Add a new plant", to: admin_plant_path(@conn, :new), class: "btn btn-primary" %>
