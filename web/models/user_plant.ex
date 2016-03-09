@@ -6,6 +6,7 @@ defmodule GrowJournal.UserPlant do
     belongs_to :plant, GrowJournal.Plant
     has_many :events, GrowJournal.Event
     field :qrcode_path, :string
+    has_many :pictures, GrowJournal.Picture
 
     timestamps
   end
@@ -27,14 +28,11 @@ defmodule GrowJournal.UserPlant do
   def create_qrcode(user_id, user_plant_id, url) do
     qrcode = :qrcode.encode(url)
     png = :qrcode_demo.simple_png_encode(qrcode)
-    short_path = "/#{user_id}/user_plants/#{user_plant_id}.png"
+    short_path = "/#{user_id}/user_plants/#{user_plant_id}/qrcode.png"
 
     # folder to create if it doesn't exist
-    folder_path = "#{System.cwd}/media/#{user_id}/user_plants"
-    full_path = "#{folder_path}/#{user_plant_id}.png"
-    if not File.exists?(folder_path) do
-      File.mkdir_p(folder_path)
-    end
+    folder_path = "#{System.cwd}/media/#{user_id}/user_plants/#{user_plant_id}/"
+    full_path = "#{folder_path}/qrcode.png"
     :ok = :file.write_file(full_path, png)
     short_path
   end

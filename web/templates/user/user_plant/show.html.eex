@@ -23,4 +23,27 @@
 </table>
 <%= link "Add new event", to: user_user_plant_event_path(@conn, :new, @user_plant) %>
 
+<h3>Last pictures</h3>
+<table class="table table-hover">
+  <thead>
+    <th>Path</th>
+    <th>Description</th>
+    <th></th>
+  </thead>
+  <tbody>
+    <%= for picture <- @user_plant.pictures do %>
+    <tr>
+      <td><img src="/media/<%= picture.path %>" alt="<%= picture.path %>" /></td>
+      <td><%= picture.description %></td>
+      <td>
+        <%= link "Show", to: user_user_plant_picture_path(@conn, :show, @user_plant, picture), class: "btn btn-default btn-xs" %>
+        <%= link "Edit", to: user_user_plant_picture_path(@conn, :edit, @user_plant, picture), class: "btn btn-default btn-xs" %>
+        <%= link "Delete", to: user_user_plant_picture_path(@conn, :delete, @user_plant, picture), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
+      </td>
+    </tr>
+    <%= end %>
+  </tbody>
+</table>
+<%= link "Add new picture", to: user_user_plant_picture_path(@conn, :new, @user_plant) %>
+
 <%= link "Back", to: user_user_plant_path(@conn, :index) %>

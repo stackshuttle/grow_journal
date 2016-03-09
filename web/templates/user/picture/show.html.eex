@@ -1,0 +1,18 @@
+<h2>Show pest</h2>
+
+<ul>
+
+  <li>
+    <strong>Plant:</strong>
+    <img src="/media/<%= @picture.path %>" alt="/media/<%= @picture.path %>" />
+  </li>
+
+  <li>
+    <strong>Name:</strong>
+    <%= @picture.description %>
+  </li>
+
+</ul>
+
+<%= link "Edit", to: user_user_plant_picture_path(@conn, :edit, @user_plant, @picture) %>
+<%= link "Back", to: user_user_plant_path(@conn, :show, @user_plant) %>
