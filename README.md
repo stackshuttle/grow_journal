@@ -181,7 +181,6 @@ Note: we don't need disease/pest/variety controllers because this is part of
 
 ## Things to do:
 
- * Implement the photo album (some of it is done, but nothing is checked in at the moment)
  * Secure personal area (i.e we need to make sure the ids passed in requests belong to the user)
  * Add a way to create admin users. We will need an extra flag on the User model as well.
  * Delete some pages (listing events is useless since it’s already visible on the user plant for example)
