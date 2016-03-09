@@ -7,12 +7,6 @@ defmodule GrowJournal.User.EventController do
 
   plug :scrub_params, "event" when action in [:create, :update]
 
-  def index(conn, %{"user_plant_id" => user_plant_id}) do
-    events = Repo.all(Event)
-    user_plant = Repo.get!(UserPlant, user_plant_id)
-    render(conn, "index.html", events: events, user_plant: user_plant)
-  end
-
   def new(conn, %{"user_plant_id" => user_plant_id}) do
     changeset = Event.changeset(%Event{})
     user_plant = Repo.get!(UserPlant, user_plant_id)
@@ -27,15 +21,9 @@ defmodule GrowJournal.User.EventController do
       {:ok, event} ->
         conn
         |> put_flash(:info, "Event created successfully.")
-        |> redirect(to: user_user_plant_event_path(conn, :show, user_plant, event))
+        |> redirect(to: user_user_plant_path(conn, :show, user_plant))
       {:error, changeset} ->
         render(conn, "new.html", changeset: changeset, user_plant: user_plant)
     end
-  end
-
-  def show(conn, %{"id" => id, "user_plant_id" => user_plant_id}) do
-    event = Repo.get!(Event, id)
-    user_plant = Repo.get!(UserPlant, user_plant_id)
-    render(conn, "show.html", event: event, user_plant: user_plant)
   end
 end
