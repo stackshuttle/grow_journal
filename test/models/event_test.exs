@@ -2,8 +2,14 @@ defmodule GrowJournal.EventTest do
   use GrowJournal.ModelCase
 
   alias GrowJournal.Event
+  alias GrowJournal.UserPlant
 
-  @valid_attrs %{description: "some content", name: "some content", when: "2010-04-17 14:00:00"}
+  @valid_attrs %{
+    description: "some content",
+    name: "some content",
+    when: "2010-04-17 14:00:00",
+    user_plant_id: 1,
+  }
   @invalid_attrs %{}
 
   test "changeset with valid attributes" do
