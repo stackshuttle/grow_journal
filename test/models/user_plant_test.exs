@@ -3,7 +3,10 @@ defmodule GrowJournal.UserPlantTest do
 
   alias GrowJournal.UserPlant
 
-  @valid_attrs %{}
+  @valid_attrs %{
+    plant_id: 1,
+    user_plant_id: 1,
+  }
   @invalid_attrs %{}
 
   test "changeset with valid attributes" do

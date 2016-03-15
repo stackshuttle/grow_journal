@@ -3,7 +3,11 @@ defmodule GrowJournal.UserTest do
 
   alias GrowJournal.User
 
-  @valid_attrs %{email: "some content", username: "some content"}
+  @valid_attrs %{
+    email: "some content",
+    username: "some content",
+    password: "some password",
+  }
   @invalid_attrs %{}
 
   test "changeset with valid attributes" do
